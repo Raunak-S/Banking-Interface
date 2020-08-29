@@ -6,32 +6,23 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class User {
-	
 	private String firstName;
 	private String lastName;
-	
 	private String uuid;
-	
 	private byte pinHash[];
-	
 	private ArrayList<Account> accounts;
 	
 	public User(String firstName, String lastName, String pin, Bank bank) {
-		
 		this.firstName = firstName;
 		this.lastName = lastName;
-		
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			this.pinHash = md.digest(pin.getBytes());
 		} catch (NoSuchAlgorithmException e) {
 			throw new RuntimeException(e);
 		}
-		
 		this.uuid = bank.getNewUserUUID();
-		
 		this.accounts = new ArrayList<>();
-		
 		System.out.println(String.format("New user (%s, %s) with ID %s created.", this.lastName, this.firstName, this.uuid));
 	}
 	

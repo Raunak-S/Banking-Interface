@@ -5,25 +5,16 @@ import java.util.ArrayList;
 public class Account {
 
 	private String name;
-	
 	private double balance;
-	
 	private String uuid;
-	
 	private User holder;
-	
 	private ArrayList<Transaction> transactions;
 	
 	public Account(String name, User holder, Bank bank) {
 		this.name = name;
 		this.holder = holder;
-		
 		this.uuid = bank.getNewAccountUUID();
-		
 		this.transactions = new ArrayList<>();
-		
-		holder.addAccount(this);
-		bank.addAccount(this);
 	}
 	
 	public String getName() {
@@ -36,5 +27,17 @@ public class Account {
 	
 	public String getUUID() {
 		return this.uuid;
+	}
+	
+	public void withdraw(double amount) {
+		this.balance -= amount;
+	}
+	
+	public void deposit(double amount) {
+		this.balance += amount;
+	}
+	
+	public void addTransaction(Transaction newTransaction) {
+		this.transactions.add(newTransaction);
 	}
 }
